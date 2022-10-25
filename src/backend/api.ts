@@ -19,7 +19,7 @@ http.interceptors.response.use(
     } = error
     if(response){
       if (response.status >= 400 && response.status < 500 ){
-        showAlert(response.data.data.message,error)
+        showAlert(response.data.data.message,'error')
         return null
       }
     }else if(request){
