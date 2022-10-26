@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { User } from "../../interfaces/user.interface";
+import { User } from "../../interfaces/User";
 import * as Yup from "yup";
-import http from "../../services/api";
+import http from "../../backend/api";
 import { saveToken, setAuthState } from "./authSlice";
 import { setUser } from "./userSlice";
-import { AuthResponse } from "../../services/mirage/routes/user";
+import { AuthResponse } from "../../backend/mirage/routes/user";
 import { useAppDispatch } from "../../store";
 
 const schema = Yup.object().shape({
@@ -17,7 +17,7 @@ const schema = Yup.object().shape({
 });
 
 const Auth: FC = () => {
-  const { handleSubmit, register, errors } = useForm<User>({
+  const { handleSubmit, register, formState:{errors} } = useForm<User>({
     validationSchema: schema,
   } as any);
 
@@ -51,7 +51,10 @@ return (
         <form onSubmit={handleSubmit(submitForm)}>
           <h1>{isLogin ? "Login" : "Signup"}</h1>
           <div className="inputWrapper">
-            <input ref={register} name="username" placeholder="Username" />
+            <input 
+            {...register} 
+            name="username" 
+            placeholder="Username" />
             {errors && errors.username && (
               <p className="error">{errors.username.message}</p>
             )}
@@ -59,7 +62,7 @@ return (
 
           <div className="inputWrapper">
             <input
-              ref={register}
+              {...register}
               name="password"
               type="password"
               placeholder="Password"
@@ -72,7 +75,7 @@ return (
           {!isLogin && (
             <div className="inputWrapper">
               <input
-                ref={register}
+                {...register}
                 name="email"
                 placeholder="Email (optional)"
               />

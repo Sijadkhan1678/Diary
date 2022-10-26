@@ -1,4 +1,4 @@
-import {} from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit'
 import rootReducer from "./rootReducer";
 import { useDispatch } from "react-redux";
 

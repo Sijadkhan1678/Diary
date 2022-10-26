@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Diary } from "../../interfaces/diary.interface";
+import { Diary } from "../../interfaces/Diary";
 
 const diaries = createSlice({
   name: "diaries",
